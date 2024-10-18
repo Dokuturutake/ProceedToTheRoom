@@ -6,7 +6,7 @@
     <title>3D Planes Scroll Animation (Centered)</title>
     <style>
     :root {
-        --plane-gap: 1500px;
+        --plane-gap: 1000px;
         --bg-color: #f0f0f0;
         --plane-border-color: black;
         --plane-color: green;
@@ -14,7 +14,7 @@
     }
 
     body, html {
-        height: 500vh;
+        height: 1000vh;
         margin: 0;
         padding: 0;
         background-color: var(--bg-color);
@@ -25,8 +25,8 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100vh;
+        width: 100svw;
+        height: 100svh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -37,35 +37,73 @@
             transform-style: preserve-3d;
 
             .plane {
-                width: 4000px;
-                height: 4000px;
+                width: min(100svh,100svw);
+                height: min(100svh,100svw);
                 position: absolute;
                 border: 2px solid var(--plane-border-color);
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 5vw;
                 font-weight: bold;
                 color: var(--plane-font-color);
                 background: var(--plane-color);
                 transform-origin: center center;
 
-                -webkit-mask-image: radial-gradient(circle at center, transparent 0.5%, black 0.51%);
-                mask-image: radial-gradient(circle at center, transparent 0.5%, black 0.51%);
+                -webkit-mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
+                mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
 
-                &:nth-child(1) { transform: translate(-50%, -50%) translateZ(500px); }
-                &:nth-child(2) { transform: translate(-50%, -50%) translateZ(0); }
-                &:nth-child(3) { transform: translate(-50%, -50%) translateZ(calc(-1 * var(--plane-gap))); }
-                &:nth-child(4) { transform: translate(-50%, -50%) translateZ(calc(-2 * var(--plane-gap))); }
-                &:nth-child(5) { transform: translate(-50%, -50%) translateZ(calc(-3 * var(--plane-gap))); }
-                &:nth-child(6) { transform: translate(-50%, -50%) translateZ(calc(-4 * var(--plane-gap))); }
+                .plane-box {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                }
+
+                &:nth-child(1) { 
+                    transform: translate(-50%, -50%) translateZ(1000px);
+                }
+                &:nth-child(2) { 
+                    transform: translate(-50%, -50%) translateZ(0);
+                    background-image:  url('/images/repeatTiles.webp');
+                    background-repeat: repeat;
+                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-position: center;
+                }
+                &:nth-child(3) { 
+                    transform: translate(-50%, -50%) translateZ(calc(-1 * var(--plane-gap))); 
+                    background-color: #a7d2b6;
+                    background-image:  url('/images/repeatconcrite.webp');
+                    background-repeat: repeat;
+                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-position: center;
+                }
+                &:nth-child(4) { transform: translate(-50%, -50%) translateZ(calc(-2 * var(--plane-gap))); 
+                    background-color: #40634c;
+                    background-image:  url('/images/repeatEyes.webp');
+                    background-repeat: repeat;
+                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-position: center;
+                }
+                &:nth-child(5) { transform: translate(-50%, -50%) translateZ(calc(-3 * var(--plane-gap))); 
+                    background-color: #2e4d47;
+                    background-image:  url('/images/repeatPaper.webp');
+                    background-repeat: repeat;
+                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-position: center;
+                }
+                &:nth-child(6) { transform: translate(-50%, -50%) translateZ(calc(-4 * var(--plane-gap))); 
+                    background-color: #181b31;
+                    background-image:  url('/images/repeatWater.webp');
+                    background-repeat: repeat;
+                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-position: center;
+                }
 
                 .circular-text {
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    width: 300px;
-                    height: 300px;
+                    width: 200px;
+                    height: 200px;
                     transform: translate(-50%, -50%);
                 }
 
@@ -73,12 +111,34 @@
                     position: absolute;
                     left: 50%;
                     font-size: 16px;
-                    transform-origin: 0 150px;
+                    transform-origin: 0 100px;
                 }
+
             }
 
         }
     }
+
+    .golden-ratio-vertical{
+        aspect-ratio: 1/1.618;
+    }
+    .golden-ratio-horizontal{
+        aspect-ratio: 1.618/1;
+    }
+
+    .gif-succsessbless-why{
+      background-image: url('images/why-image.gif');
+      background-repeat: no-repeat; 
+      background-size: cover; /* アスペクト比を維持しながら要素を覆う */
+    }
+
+    .container{
+        container-type: inline-size;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
 </style>
 
 </head>
@@ -87,12 +147,18 @@
         <div class="planes-container">
             <!-- 各Planeに異なるクラスを割り当て -->
             <div class="plane"><div class="circular-text"></div></div>
-            <div class="plane">1</div>
+            <div class="plane">
+                <div class="container">
+                    <div class="golden-ratio-horizontal plane-box gif-succsessbless-why" style="height: 30cqw; will-change: transform;">
+                    </div>
+                </div>
+            </div>
             <div class="plane">2</div>
             <div class="plane">3</div>
             <div class="plane">4</div>
             <div class="plane">5</div>
         </div>
+
     </div>
 
     <script>
@@ -101,7 +167,7 @@
             const scrollY = window.scrollY;
             const container = document.querySelector('.planes-container');
             const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const zPosition = (scrollY / maxScroll) * 8000;  // Z軸の範囲を0〜4700pxにする
+            const zPosition = (scrollY / maxScroll) * 5000;  // Z軸の範囲を0〜4700pxにする
 
             container.style.transform = `translateZ(${zPosition}px)`;
         });
