@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Planes Scroll Animation (Centered)</title>
+    <title>3D layers Scroll Animation (Centered)</title>
     <style>
     :root {
-        --plane-gap: 1000px;
-        --bg-color: #f0f0f0;
-        --plane-border-color: black;
-        --plane-color: green;
-        --plane-font-color: white;
+        --layer-gap: 900px;
+        --bg-color: #000;
+        --layer-border-color: black;
+        --layer-color: green;
+        --layer-font-color: white;
     }
 
     body, html {
@@ -32,86 +32,102 @@
         align-items: center;
         perspective: 1000px;
 
-        .planes-container {
+        .layers-container {
             position: relative;
             transform-style: preserve-3d;
 
-            .plane {
+            .layer {
                 width: min(100svh,100svw);
                 height: min(100svh,100svw);
                 position: absolute;
-                border: 2px solid var(--plane-border-color);
+                border: 2px solid var(--layer-border-color);
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-weight: bold;
-                color: var(--plane-font-color);
-                background: var(--plane-color);
+                color: var(--layer-font-color);
                 transform-origin: center center;
+                transform-style: preserve-3d;
+                transform: translate(-50%, -50%);
+                container-type: inline-size;
 
-                -webkit-mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
-                mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
 
-                .plane-box {
+                .layer-box {
                     position: absolute;
                     top: 50%;
                     left: 50%;
+                    transform-style: preserve-3d;
                 }
 
-                &:nth-child(1) { 
-                    transform: translate(-50%, -50%) translateZ(1000px);
+                .plane-0 { 
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
+                    -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+                    mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+
+                    background-image: radial-gradient(circle at center, rgb(32, 32, 32),rgb(0, 0, 0));
+
                 }
-                &:nth-child(2) { 
-                    transform: translate(-50%, -50%) translateZ(0);
-                    background-image:  url('/images/repeatTiles.webp');
-                    background-repeat: repeat;
-                    background-size: 500px 500px; /* 画像サイズを指定 */
-                    background-position: center;
+                .plane-1 { 
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
+                    -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+                    mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+                    background-image: linear-gradient(
+                        to top,
+                        #2c96cb 0%,
+                        #ccd8ff 50%,
+                        #5188ff 50%,
+                        #32affd 100%
+                    );
                 }
-                &:nth-child(3) { 
-                    transform: translate(-50%, -50%) translateZ(calc(-1 * var(--plane-gap))); 
+                .plane-2 { 
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
                     background-color: #a7d2b6;
                     background-image:  url('/images/repeatconcrite.webp');
                     background-repeat: repeat;
                     background-size: 500px 500px; /* 画像サイズを指定 */
                     background-position: center;
+                    -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+                    mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                 }
-                &:nth-child(4) { transform: translate(-50%, -50%) translateZ(calc(-2 * var(--plane-gap))); 
+                .plane-3 { 
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
                     background-color: #40634c;
                     background-image:  url('/images/repeatEyes.webp');
                     background-repeat: repeat;
                     background-size: 500px 500px; /* 画像サイズを指定 */
                     background-position: center;
+                    -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
+                    mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                 }
-                &:nth-child(5) { transform: translate(-50%, -50%) translateZ(calc(-3 * var(--plane-gap))); 
+                .plane-4 {  
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
                     background-color: #2e4d47;
                     background-image:  url('/images/repeatPaper.webp');
                     background-repeat: repeat;
                     background-size: 500px 500px; /* 画像サイズを指定 */
                     background-position: center;
+                    -webkit-mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
+                    mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
                 }
-                &:nth-child(6) { transform: translate(-50%, -50%) translateZ(calc(-4 * var(--plane-gap))); 
+                .plane-5 {  
+                    width: max(100svh,100svw);
+                    height: max(100svh,100svw);
+                    aspect-ratio: 1/1;
                     background-color: #181b31;
                     background-image:  url('/images/repeatWater.webp');
                     background-repeat: repeat;
                     background-size: 500px 500px; /* 画像サイズを指定 */
                     background-position: center;
-                }
-
-                .circular-text {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 200px;
-                    height: 200px;
-                    transform: translate(-50%, -50%);
-                }
-
-                .circular-text span {
-                    position: absolute;
-                    left: 50%;
-                    font-size: 16px;
-                    transform-origin: 0 100px;
                 }
 
             }
@@ -130,33 +146,124 @@
       background-image: url('images/why-image.gif');
       background-repeat: no-repeat; 
       background-size: cover; /* アスペクト比を維持しながら要素を覆う */
+      transform-style: preserve-3d;
+      width: 100%;
+      height: 100%;
+
+    }
+    .gif-succsessbless-why-position{
+        transform: translate(20cqw, 20cqw);
     }
 
     .container{
+        position:absolute;
         container-type: inline-size;
         margin: 0;
-        width: 100%;
-        height: 100%;
+        transform-style: preserve-3d;
+        width: min(100svh,100svw);
+        height: min(100svh,100svw);
     }
 
+    html {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    html::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, and Opera */
+    }
+
+    .rolltext-svg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width:200px;
+        height:200px;
+        transform: translate(-50%, -50%);
+        
+    }
+
+    .w-30cqw{
+        width: 30cqw;
+    }
+
+    svg{
+        overflow: visible;
+        path{
+            fill:none;
+        }
+    }
+    
+    @keyframes rotate {
+        from {
+            transform:translate(-50%, -50%) rotate(0deg);
+        }
+        to {
+            transform:translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .rotating-text {
+        animation: rotate 40s linear infinite;
+        transform-origin: center;
+    }
+
+
+    .dark {
+    background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .translate3d-effect{
+        transform-style: preserve-3d;
+        position:absolute;
+        transition: transform 0.5s ease-in-out; /* transformプロパティを0.5秒かけて滑らかに変化 */
+    }
+    .translate3d-effect.active {
+        transform:translate(0%, 0%); /* X軸方向に100px移動 */
+    }
+    
 </style>
 
 </head>
 <body>
     <div class="scene">
-        <div class="planes-container">
-            <!-- 各Planeに異なるクラスを割り当て -->
-            <div class="plane"><div class="circular-text"></div></div>
-            <div class="plane">
-                <div class="container">
-                    <div class="golden-ratio-horizontal plane-box gif-succsessbless-why" style="height: 30cqw; will-change: transform;">
+        <div class="layers-container">
+            <div layer="0">
+                <div class="plane-0"></div>
+                    <div class="rolltext-svg ">
+                        <svg viewBox="0 0 100 100">
+                            <path id="circlePath" d="M 0,50 a 50,50 0 1,1 0,1 z" />
+                                <text style="fill:rgb(17, 17, 17)">
+                                    <textPath xlink:href="#circlePath">
+                                        One hole leads to a new perspective. Will you peek inside?
+                                    </textPath>
+                                </text>
+                        </svg>
                     </div>
+                <div class="circular-text"></div>
+            </div>
+            <div layer="1">
+                <div class="plane-1"></div>
+                <div class="translate3d-effect golden-ratio-horizontal w-30cqw gif-succsessbless-why-position" >
+                    <div class=" gif-succsessbless-why" tZ="200">
+                </div>
                 </div>
             </div>
-            <div class="plane">2</div>
-            <div class="plane">3</div>
-            <div class="plane">4</div>
-            <div class="plane">5</div>
+            <div layer="2">
+                <div class="plane-2"></div>
+            </div>
+            <div layer="3">
+                <div class="plane-3"></div>
+            </div>
+            <div layer="4">
+                <div class="plane-4"></div>
+            </div>
+            <div layer="5">
+                <div class="plane-5"></div>
+            </div>
+
+            <div class="container">
+            </div>
         </div>
 
     </div>
@@ -165,7 +272,7 @@
         // スクロールに基づいてコンテナのZ位置を更新
         document.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
-            const container = document.querySelector('.planes-container');
+            const container = document.querySelector('.layers-container');
             const maxScroll = document.body.scrollHeight - window.innerHeight;
             const zPosition = (scrollY / maxScroll) * 5000;  // Z軸の範囲を0〜4700pxにする
 
@@ -173,15 +280,55 @@
         });
 
 
-        const text = "Your Circular Text Here • ";
-        const circularText = document.querySelector('.circular-text');
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[layer]').forEach(el => {
+                const depth = el.getAttribute('layer');
+                el.classList.add("layer");
+                el.style.transform = `translate(-50%, -50%) translateZ(calc(-${depth} * var(--layer-gap)))`;
+            });
+        });
 
-        for (let i = 0; i < text.length; i++) {
-            const span = document.createElement('span');
-            span.textContent = text[i];
-            span.style.transform = `rotate(${i * 8}deg)`;
-            circularText.appendChild(span);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[tZ]').forEach(el => {
+                const depth = el.getAttribute('tZ');
+                el.style.transform = `translateZ(${depth}px)`;
+            });
+        });
+
+
+    /*document.addEventListener('DOMContentLoaded', (event) => {
+    const dark = document.querySelector('.dark');
+
+    dark.addEventListener('mouseleave', function (e) {
+      dark.setAttribute(
+        "style",
+        `background-color:rgba(0,0,0,0.9); `
+      );
+    })
+
+    dark.addEventListener('mousemove', function (e) {
+      const rect = this.getBoundingClientRect();
+      // 要素の左上を原点(0,0)とした時のマウスカーソルの位置を設定
+      const x = e.clientX - rect.left;// 要素の左端からのマウスカーソルのX座標
+      const y = e.clientY - rect.top;// 要素の上端からのマウスカーソルのY座標
+      // マウスカーソルの位置にスポットライトをあてるCSSスタイルの設定
+      dark.setAttribute(
+        "style",
+        `background-image:
+        radial-gradient(circle at ${x}px ${y}px, 
+          #fff  0px, #fff 30px, transparent 100px)`
+      );
+    });
+  });*/
+
+
+    document.querySelectorAll('.translate3d-effect').forEach(element => {
+    element.addEventListener('click', () => {
+        element.classList.toggle('active');
+    });
+    });
+
+    
     </script>
 </body>
 </html>
