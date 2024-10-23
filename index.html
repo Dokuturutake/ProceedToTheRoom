@@ -6,8 +6,8 @@
     <title>3D layers Scroll Animation (Centered)</title>
     <style>
     :root {
-        --layer-gap: 900px;
-        --bg-color: #000;
+        --layer-gap: 4000px;
+        --bg-color: #02070d;
         --layer-border-color: black;
         --layer-color: green;
         --layer-font-color: white;
@@ -66,31 +66,26 @@
                     -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                     mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
 
-                    background-image: radial-gradient(circle at center, rgb(32, 32, 32),rgb(0, 0, 0));
+                    background-image: radial-gradient(circle at center, rgb(52, 52, 52),rgb(0, 0, 0));
 
                 }
                 .plane-1 { 
                     width: max(100svh,100svw);
                     height: max(100svh,100svw);
                     aspect-ratio: 1/1;
+                    background-size: cover;
+                    background-position: center;
+                    background-image:  url('/images/BackGround-Images/BackGround-Image\ \(7\).jpg');
                     -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                     mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
-                    background-image: linear-gradient(
-                        to top,
-                        #2c96cb 0%,
-                        #ccd8ff 50%,
-                        #5188ff 50%,
-                        #32affd 100%
-                    );
                 }
                 .plane-2 { 
                     width: max(100svh,100svw);
                     height: max(100svh,100svw);
                     aspect-ratio: 1/1;
                     background-color: #a7d2b6;
-                    background-image:  url('/images/repeatconcrite.webp');
-                    background-repeat: repeat;
-                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-image:  url('/images/BackGround-Images/BackGround-Image\ \(7\).jpg');
+                    background-size: cover;
                     background-position: center;
                     -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                     mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
@@ -100,9 +95,9 @@
                     height: max(100svh,100svw);
                     aspect-ratio: 1/1;
                     background-color: #40634c;
-                    background-image:  url('/images/repeatEyes.webp');
+                    background-image:  url('/images/BackGround-Images/BackGround-Image\ \(13\).jpg');
+                    background-size: cover;
                     background-repeat: repeat;
-                    background-size: 500px 500px; /* 画像サイズを指定 */
                     background-position: center;
                     -webkit-mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
                     mask-image: radial-gradient(circle at center, transparent 1%, black 0.05%);
@@ -112,9 +107,9 @@
                     height: max(100svh,100svw);
                     aspect-ratio: 1/1;
                     background-color: #2e4d47;
-                    background-image:  url('/images/repeatPaper.webp');
+                    background-image:  url('/images/BackGround-Images/BackGround-Image\ \(12\).jpg');
                     background-repeat: repeat;
-                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-size: cover;
                     background-position: center;
                     -webkit-mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
                     mask-image: radial-gradient(circle at center, transparent 0.1%, black 0.05%);
@@ -124,9 +119,9 @@
                     height: max(100svh,100svw);
                     aspect-ratio: 1/1;
                     background-color: #181b31;
-                    background-image:  url('/images/repeatWater.webp');
+                    background-image:  url('/images/BackGround-Images/BackGround-Image\ \(11\).jpg');
                     background-repeat: repeat;
-                    background-size: 500px 500px; /* 画像サイズを指定 */
+                    background-size: cover;
                     background-position: center;
                 }
 
@@ -269,14 +264,28 @@
     </div>
 
     <script>
+
+    const colors = ['#02070d', '#90EE90', '#FFD700', '#FF6347', '#9370DB'];
+
+        const ScrollSize = 20000;
+
         // スクロールに基づいてコンテナのZ位置を更新
         document.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const container = document.querySelector('.layers-container');
             const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const zPosition = (scrollY / maxScroll) * 5000;  // Z軸の範囲を0〜4700pxにする
+            const zPosition = (scrollY / maxScroll) * ScrollSize;  
 
             container.style.transform = `translateZ(${zPosition}px)`;
+
+                // 1000px毎に背景色を切り替える
+            const colorIndex = Math.floor(zPosition / (ScrollSize/colors.length));
+            if (colorIndex < colors.length) {
+                document.body.style.backgroundColor = colors[colorIndex];
+            } else {
+                // 配列の最後の色を使用
+                document.body.style.backgroundColor = colors[colors.length - 1];
+            }
         });
 
 
